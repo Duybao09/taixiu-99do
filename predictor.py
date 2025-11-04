@@ -98,7 +98,8 @@ def predict_next(history, max_window=7):
 
 def fetch_data():
     try:
-        response = requests.get(API_URL, headers=headers, timeout=10)
+        # ✅ Bỏ kiểm tra SSL để tránh lỗi CERTIFICATE_VERIFY_FAILED
+        response = requests.get(API_URL, headers=headers, timeout=10, verify=False)
         if response.status_code == 200:
             return response.json()
         else:
